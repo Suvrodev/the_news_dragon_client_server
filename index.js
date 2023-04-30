@@ -12,16 +12,33 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/categories',(req,res)=>{
+    console.log("All Category")
     res.send(categories)
 })
 
-// app.get('/:id',(req,res)=>{
-//     const target=categories.find(category=>category.id==id)
-//     res.send(target)
-// })
+app.get('/categories/:id',(req,res)=>{
+    const id=req.params.id;
+    console.log(id)
+
+    if(id==0){
+      
+        res.send(news)
+    }else{
+        const selectedCategory=news.filter(n=>n.category_id==id)
+        res.send(selectedCategory)
+    }
+  
+})
 
 app.get('/news',(req,res)=>{
     res.send(news)
+    console.log('All news')
+})
+app.get('/news/:id',(req,res)=>{
+    const id=req.params.id;
+    console.log(id)
+    const selectedNews=news.find(n=>n._id==id)
+    res.send(selectedNews)
 })
 
 app.listen(port,()=>{
